@@ -97,7 +97,7 @@
   {% if GOOGLE_ANALYTICS %}
     {% include "partial/ga.html" %}
   {% endif %}
-  
+
   {% if GOOGLE_GLOBAL_SITE_TAG %}
     {% include "partial/ggst.html" %}
   {% endif %}
@@ -207,9 +207,7 @@
           {% endif %}
 
           {% for name, link in LINKS %}
-            <li>
-              <a target="{{ get_target(link) }}" href="{{ link }}" >{{ name }}</a>
-            </li>
+            <li><a href="{{ link }}">{{ name }}</a></li>
           {% endfor %}
         </ul>
       </nav>
