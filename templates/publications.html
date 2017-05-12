@@ -2,21 +2,6 @@
 
 {% block title %} &ndash; Publications{% endblock %}
 
-{% block meta %}
-  {{ super() }}
-  <script type="text/javascript">
-  function disp(s) {
-    var win;
-    var doc;
-    win = window.open("", "WINDOWID");
-    doc = win.document;
-    doc.open("text/plain");
-    doc.write("<pre>" + s + "</pre>");
-    doc.close();
-    }
-  </script>
-{% endblock %}
-
 {% block content %}
 
 <article class="single">
@@ -30,21 +15,20 @@
     <p>This is a complete list of publications I have authored or co-authored.
         You can find my h-index and i10-index information at <a
         href="http://scholar.google.com/citations?user=pAfLhMoAAAAJ"
-        target="_blank">Google Scholar</a>.
+        target="_blank">Google Scholar</a>. Clicking on the text of an entry
+        will show you the BibTeX citation for such an entry, together with a
+        download link, if one is available.
     </p>
     {% endblock %}
       {% for group in publications|groupby(1)|reverse %}
       <h3 id="{{ group.grouper }}">{{ group.grouper }}</h3>
-      <ul>
-        {% for key, year, text, bibtex, pdf, slides, poster in group.list %}
-        <li id="{{ key }}">{{ text }}
-          [&nbsp;<a href="javascript:disp('{{ bibtex|replace('\n', '\\n')|escape|forceescape }}');">Bibtex</a>&nbsp;]
-          {% for label, target in [('PDF', pdf), ('Slides', slides), ('Poster', poster)] %}
-          {{ "[&nbsp;<a href=\"%s\">%s</a>&nbsp;]" % (target, label) if target }}
-        {% endfor %}
-        </li>
+      {% for key, year, text, bibtex, pdf, slides, poster in group.list %}
+      <details>
+        <summary>{{ text }}</summary>
+        {% if pdf %}<a href="{{ pdf }}" target="_blank"><b>PDF:</b> <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>{% endif %}
+        <pre class="bibtex">{{ bibtex|replace("\textasciitilde ","~")|safe }}</pre>
+      </details>
       {% endfor %}
-      </ul>
       {% endfor %}
     {% block after_content %}{% endblock %}
   </div>
