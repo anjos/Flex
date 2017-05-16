@@ -1,10 +1,10 @@
 {% extends "index.html" %}
-{% block title %} &ndash; {{ object.name }}:{% endblock %}
+{% block title %} &ndash; {{ object.title }}:{% endblock %}
 
 {% block content %}
 <article class="single">
   <header>
-    <h1 id="{{ object.slug }}">{{ object.name }}</h1>
+    <h1 id="{{ object.slug }}">{{ object.title }}</h1>
   </header>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}
@@ -19,8 +19,8 @@
 
   <div>
     <ul>
-      {% for song in object.songs %}
-      <li><a href="{{ song.url }}">{{ song.name }}</a> em {{ song.tone }}</li>
+      {% for song in object.metadata.songs %}
+      <li><a href="{{ SITEURL }}/{{ song.url }}">{{ song.title }}</a> (tom: {{ song.tone }}){% if song.metadata.performer %}, por <a href="{{ SITEURL }}/{{ song.metadata.performer.url }}">{{ song.metadata.performer.name }}</a>{% elif song.metadata.composer %}, por <a href="{{ SITEURL }}/{{ song.metadata.composer.url }}">{{ song.metadata.composer.name }}</a>{% else %}, Anônimo{% endif %}</li>
       {% endfor %}
     </ul>
   </div>

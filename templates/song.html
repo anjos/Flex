@@ -3,11 +3,12 @@
 {% block title %} &ndash; {{ object.title|striptags|escape }}{% endblock %}
 
 {% block content %}
-<article class="single">
+<article class="single chords">
   <header>
     <h1 id="{{ object.slug }}">{{ object.title }}</h1>
     <p>
-      {{ _('Posted on %(when)s', when=object.locale_date)|safe }}
+    {% if object.modified %}{{ object.locale_modified }}{% else %}{{ object.locale_date }}{% endif %}{% if object.performer %} | Intérprete: <a href="{{ SITEURL }}/{{ object.performer.url }}">{{ object.performer.name }}</a>{% endif %}{% if object.composer %} | Compositor: <a href="{{ SITEURL }}/{{ object.composer.url }}">{{ object.composer.name }}</a>{% endif %}<br />
+    Tom:  {{ object.tone }}
     </p>
   </header>
 
@@ -21,9 +22,23 @@
     </script>
   {% endif %}
 
-  <div>
-    {{ object.song }}
-  </div>
+  {% if object.two_columns %}
+  {% with column = object.items_by_column() %}
+  <table class="two_columns">
+    <tr>
+      <td id="column_1">
+        <pre class="song">{% for i in column.0 %}{{ i.as_html()|safe }}{% endfor %}</pre>
+      </td>
+      <td class="separator" style="border-right-color: #{{ object.performer.color }}"><br/></td>
+      <td id="column_2">
+        <pre class="song">{% for i in column.1 %}{{ i.as_html()|safe }}{% endfor %}</pre>
+      </td>
+    </tr>
+  </table>
+  {% endwith %}
+  {% else %}
+  <pre class="song">{% for i in object.items() %}{{ i.as_html()|safe }}{% endfor %}</pre>
+  {% endif %}
 
   <div class="tag-cloud">
     <p>
