@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %} &ndash; {{ object.title|striptags|escape }}{% endblock %}
+
+{% block content %}
+<article class="single">
+  <header>
+    <h1 id="{{ object.slug }}">{{ object.title }}</h1>
+    <p>
+      {{ _('Posted on %(when)s', when=object.locale_date)|safe }}
+    </p>
+  </header>
+
+  {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
+         data-ad-slot="{{ GOOGLE_ADSENSE.ads.article_top }}"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  {% endif %}
+
+  <div>
+    {{ object.song }}
+  </div>
+
+  <div class="tag-cloud">
+    <p>
+      {% if object.tags %}
+      {% for tag in object.tags %}
+      <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+      {% endfor %}
+      {% endif %}
+    </p>
+  </div>
+
+  {% if ADD_THIS_ID %}
+  <div class="center social-share">
+    <p>{{ _('Like this article? Share it with your friends!') }}</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+    <div class="addthis_inline_share_toolbox"></div>
+  </div>
+  {% endif %}
+
+  {% include "partial/neighbors.html" %}
+
+  {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_bottom %}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
+         data-ad-slot="{{ GOOGLE_ADSENSE.ads.article_bottom }}"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  {% endif %}
+
+</article>
+{% endblock %}
