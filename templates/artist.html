@@ -20,7 +20,7 @@
   <div>
     <ul>
       {% for song in object.songs %}
-      <li><a href="{{ song.url }}">{{ song.name }}</a> em {{ song.tone }}</li>
+      <li><a href="{{ SITEURL }}/{{ song.url }}">{{ song.title }}</a> em {{ song.tone }}</li>
       {% endfor %}
     </ul>
   </div>
