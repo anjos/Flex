@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %} &ndash; {{ _('Músicas') }}:{% endblock %}
+
+{% block content %}
+<article class="single">
+  <header>
+    <h1>Músicas</h1>
+  </header>
+
+  {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
+         data-ad-slot="{{ GOOGLE_ADSENSE.ads.article_top }}"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  {% endif %}
+
+  <div>
+    <table class="list">
+      <tr>
+        <th>Nome</th>
+        <th>Tom</th>
+        <th>Intérprete</th>
+        <th>Compositor</th>
+        <th>Atualizada</th>
+      </tr>
+      {% for obj in objects %}
+      <tr>
+        <td><a href="{{ SITEURL }}/{{ obj.url }}">{{ obj.title }}</a></td>
+        <td>{{ obj.tone }}</td>
+        <td><a href="{{ SITEURL }}/{{ obj.performer.url }}">{{ obj.performer.name }}</a></td>
+        <td><a href="{{ SITEURL }}/{{ obj.composer.url }}">{{ obj.composer.name }}</a></td>
+        <td>{{ obj.locale_modified }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4">Nenhuma música registrada</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  {% if ADD_THIS_ID %}
+  <div class="center social-share">
+    <p>{{ _('Like this article? Share it with your friends!') }}</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+    <div class="addthis_inline_share_toolbox"></div>
+  </div>
+  {% endif %}
+
+  {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_bottom %}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
+         data-ad-slot="{{ GOOGLE_ADSENSE.ads.article_bottom }}"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  {% endif %}
+
+</article>
+{% endblock %}
+
