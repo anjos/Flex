@@ -5,7 +5,7 @@
 {% block content %}
 <article class="single chords">
   <header>
-    <h1 id="{{ object.slug }}">{{ object.title }}</h1>
+    <h1 id="{{ object.slug }}">{{ object.title }} <a href="{{ SITEURL }}/{{ object.pdf_url }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></h1>
     <p>
     {% if object.modified %}{{ object.locale_modified }}{% else %}{{ object.locale_date }}{% endif %}{% if object.performer %} | Intérprete: <a href="{{ SITEURL }}/{{ object.performer.url }}">{{ object.performer.name }}</a>{% endif %}{% if object.composer %} | Compositor: <a href="{{ SITEURL }}/{{ object.composer.url }}">{{ object.composer.name }}</a>{% endif %}<br />
     Tom:  {{ object.tone }}
