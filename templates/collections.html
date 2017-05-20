@@ -18,18 +18,20 @@
     </script>
   {% endif %}
 
-  <div>
-    <table class="list">
+  <div class="chords-list">
+    <table>
       <tr>
         <th>Nome</th>
         <th>Músicas</th>
         <th>Atualizada</th>
+        <th><i class="fa fa-file-pdf-o" aria-hidden="true"></i></th>
       </tr>
       {% for obj in objects %}
       <tr>
         <td><a href="{{ SITEURL }}/{{ obj.url }}">{{ obj.title }}</a></td>
         <td>{{ obj.songs|length }}</td>
         <td>{{ obj.locale_modified }}</td>
+        <td><a href="{{ SITEURL }}/{{ obj.pdf_url }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></td>
       </tr>
       {% else %}
       <tr><td colspan="3">Nenhuma coletânea registrada</td></tr>

@@ -4,7 +4,7 @@
 {% block content %}
 <article class="single">
   <header>
-    <h1 id="{{ object.slug }}">{{ object.name }}</h1>
+    <h1 id="{{ object.slug }}">{{ object.name }} <a href="{{ SITEURL }}/{{ object.pdf_url }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></h1>
   </header>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}
@@ -17,12 +17,25 @@
     </script>
   {% endif %}
 
-  <div>
-    <ul>
-      {% for song in object.songs %}
-      <li><a href="{{ SITEURL }}/{{ song.url }}">{{ song.title }}</a> em {{ song.tone }}</li>
+  <div class="chords-list">
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Tom</th>
+        <th>Atualizada</th>
+        <th><i class="fa fa-file-pdf-o" aria-hidden="true"></i></th>
+      </tr>
+      {% for obj in object.songs %}
+      <tr>
+        <td><a href="{{ SITEURL }}/{{ obj.url }}">{{ obj.title }}</a></td>
+        <td>{{ obj.tone }}</td>
+        <td>{{ obj.locale_modified }}</td>
+        <td><a href="{{ SITEURL }}/{{ obj.pdf_url }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4">Nenhuma música registrada</td></tr>
       {% endfor %}
-    </ul>
+    </table>
   </div>
 
   <div class="tag-cloud">

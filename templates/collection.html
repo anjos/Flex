@@ -4,7 +4,8 @@
 {% block content %}
 <article class="single">
   <header>
-    <h1 id="{{ object.slug }}">{{ object.title }}</h1>
+    <h1 id="{{ object.slug }}">{{ object.title }} <a href="{{ SITEURL }}/{{ object.pdf_url }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></h1>
+    <p>{% if object.modified %}{{ object.locale_modified }}{% else %}{{ object.locale_date }}{% endif %}</p>
   </header>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}
@@ -17,12 +18,29 @@
     </script>
   {% endif %}
 
-  <div>
-    <ul>
-      {% for song in object.metadata.songs %}
-      <li><a href="{{ SITEURL }}/{{ song.url }}">{{ song.title }}</a> (tom: {{ song.tone }}){% if song.metadata.performer %}, por <a href="{{ SITEURL }}/{{ song.metadata.performer.url }}">{{ song.metadata.performer.name }}</a>{% elif song.metadata.composer %}, por <a href="{{ SITEURL }}/{{ song.metadata.composer.url }}">{{ song.metadata.composer.name }}</a>{% else %}, Anônimo{% endif %}</li>
+  <div class="chords-list">
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Tom</th>
+        <th>Intérprete</th>
+        <th>Compositor</th>
+        <th>Atualizada</th>
+        <th><i class="fa fa-file-pdf-o" aria-hidden="true"></i></th>
+      </tr>
+      {% for obj in object.songs %}
+      <tr>
+        <td><a href="{{ SITEURL }}/{{ obj.url }}">{{ obj.title }}</a></td>
+        <td>{{ obj.tone }}</td>
+        <td><a href="{{ SITEURL }}/{{ obj.performer.url }}">{{ obj.performer.name }}</a></td>
+        <td><a href="{{ SITEURL }}/{{ obj.composer.url }}">{{ obj.composer.name }}</a></td>
+        <td>{{ obj.locale_modified }}</td>
+        <td><a href="{{ SITEURL }}/{{ obj.pdf_url }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">Nenhuma música registrada</td></tr>
       {% endfor %}
-    </ul>
+    </table>
   </div>
 
   <div class="tag-cloud">
