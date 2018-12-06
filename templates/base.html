@@ -76,6 +76,7 @@
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/academicons/css/academicons.min.css">
 
   {% if CUSTOM_CSS %}
     <link href="{{ SITEURL }}/{{ CUSTOM_CSS }}" rel="stylesheet">
@@ -215,10 +216,10 @@
 
       <ul class="social">
         {% for name, link in SOCIAL %}
-        {% if name == "orcid" %}
+        {% if name in ['orcid','google-scholar'] %}
           <li>
             <a {% if name == 'mastodon' %}rel="me"{% endif %} class="sc-{{ name }}" href="{{ link }}" target="_blank">
-              <i class="fa fa-searchengin"></i>
+                <i class="ai ai-{{ name }}"></i>
             </a>
           </li>
         {% else %}
