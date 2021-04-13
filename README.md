@@ -93,6 +93,18 @@ If things make sense, send a PR with your changes.
 
 As always, if you want something that only makes sense to you, fork Flex and create a new theme.
 
+## Re-minimizing CSS and JS files
+
+This project supports gulp:
+
+```sh
+$ cd <root-of-theme>
+$ npm init -y
+$ npm i --global gulp-cli  #global install
+$ npm i --savedev gulp gulp-minify gulp-less gulp-rename gulp-cssnano gulp-uglify
+$ gulp
+```
+
 ## Translations
 
 Translate this theme to new languages at [Transifex](https://www.transifex.com/alexandrevicenzi/flex-pelican/).
