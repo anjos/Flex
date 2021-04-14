@@ -4,7 +4,7 @@
   "description": "A minimalist Pelican theme",
   "main": "gulpfile.js",
   "directories": {
-    "test": "tests"
+    "doc": "docs"
   },
   "scripts": {
     "test": "source venv/bin/activate && pip install pelican markdown && pelican -s tests/pelicanconf.py && deactivate",
