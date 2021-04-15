@@ -602,7 +602,8 @@ ul.social {
 
 // Admonition
 div.admonition {
-  margin-bottom: 2.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   border-radius: 4px;
   padding: 0.5em 1.25em 1.25em 1.25em;
 
@@ -746,4 +747,10 @@ div.figure.align-center {
 
 div.figure.align-right {
   text-align: right;
+}
+
+//handles the special case in which we have a "caption" after a series of
+//images in a "center" container
+p.figure.center {
+    margin: 0;
 }
