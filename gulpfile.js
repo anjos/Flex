@@ -26,11 +26,6 @@ gulp.task('uglify', function () {
         .pipe(gulp.dest('./static/dark-theme'));
 });
 
-gulp.task('cp', function () {
-    return gulp.src('./node_modules/font-awesome/**/*.{min.css,otf,eot,svg,ttf,woff,woff2}')
-        .pipe(gulp.dest('./static/font-awesome'));
-});
-
 gulp.task('pygments', function () {
     return gulp.src(['./static/pygments/*.css', '!./static/pygments/*min.css'])
         .pipe(cssnano())
@@ -48,6 +43,6 @@ gulp.task('watch-js', function () {
     return gulp.watch('static/dark-theme/!(*.min).js', gulp.task('uglify'));
 })
 
-gulp.task('default', gulp.series(['less', 'uglify', 'cp', 'pygments']));
+gulp.task('default', gulp.series(['less', 'uglify', 'pygments']));
 
 gulp.task('watch', gulp.series('default', gulp.parallel('watch-less', 'watch-js')));
