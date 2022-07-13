@@ -22,7 +22,7 @@
     {% endblock %}
       {% for group in publications|groupby(1)|reverse %}
       <h3 id="{{ group.grouper }}">{{ group.grouper }}</h3>
-      {% for key, year, text, bibtex, pdf, slides, poster in group.list|sort(attribute='0', reverse=True) %}
+      {% for key, year, text, bibtex, pdf, slides, poster, datum in group.list|sort(attribute='7', reverse=True) %}
       <details>
         <summary>{{ text }}</summary>
         {% if pdf %}<br/><a href="{{ pdf }}" target="_blank"><b>Article:</b> <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>{% endif %}
