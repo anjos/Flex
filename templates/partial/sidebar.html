@@ -77,7 +77,7 @@
            {% if name in relme %}rel="me"{% endif %}
            href="{{ link }}"
            target="_blank">
-          <i class="{% if name in solid %}fa-solid{% else %}fa-brands{% endif %} fa-{{ name }}"></i>
+           {% if name == "google-scholar" %}<i class="{% if name in solid %}fa-solid{% else %}ai{% endif %} ai-google-scholar-square"></i>{% else %}<i class="{% if name in solid %}fa-solid{% else %}fa-brands{% endif %} fa-{{ name }}"></i>{% endif %}
         </a>
       </li>
       {% endfor %}
